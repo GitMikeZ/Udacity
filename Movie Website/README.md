@@ -1,7 +1,5 @@
 ﻿# Movie Website
 
-## Synopsis
-
 A website that stores a list of movies, including box art images and a movie trailer URL. The website servers allows visitors to view the movies and watch the respectable trailers.
 
 ## Motivation
