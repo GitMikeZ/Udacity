@@ -1,6 +1,6 @@
 ﻿# Tournament
 
-A swiss tournament pqsl database schema used to store a game between players and test various coded functions.
+A swiss tournament psql database schema used to store a game between players and test various coded functions.
 
 ## Test
 
