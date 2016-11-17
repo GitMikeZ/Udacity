@@ -108,11 +108,12 @@ def swissPairings():
     results = c.fetchall()
     pairs = []
     count = len(results)
-
-    for i in range(0, count - 1, 2):
+    i = 0
+    while i < len(results):
         pair_list = (results[i][0], results[i][1], 
-					 results[i+1][0], results[i+1][1])
+		     results[i+1][0], results[i+1][1])
         pairs.append(pair_list)
+	i = i + 2;
 
     c.close()
     return pairs

@@ -5,6 +5,7 @@
 --
 -- You can write comments in this file by starting them with two dashes, like
 -- these lines here.
+
 DROP DATABASE IF EXISTS tournament;
 
 CREATE DATABASE tournament;
@@ -27,9 +28,8 @@ CREATE TABLE rounds(
 );
 
 CREATE VIEW standings AS
-SELECT p.player_id as player_id, p.player_name,
-(SELECT count(*) FROM rounds WHERE rounds.winner = p.player_id) as won,
-(SELECT count(*) FROM rounds WHERE p.player_id in (winner, loser)) as played
-FROM players p
-GROUP BY p.player_id
-ORDER BY won DESC;
+SELECT players.player_id, players.player_name, FROM players
+(SELECT count(*) FROM rounds WHERE rounds.winner = players.player_id) as gameWon,
+(SELECT count(*) FROM rounds WHERE players.player_id in (winner, loser)) as gamePlayed
+GROUP BY players.player_id
+ORDER BY gameWon DESC;
