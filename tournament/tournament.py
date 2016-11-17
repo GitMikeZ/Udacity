@@ -49,8 +49,9 @@ def registerPlayer(name):
       name: the player's full name (need not be unique).
     """
     db, cursor = connect()
-    query = ("INSERT INTO players(id, name) VALUES (default, %s);")
-    cursor.execute(query, (name,))
+    query = "INSERT INTO players(id, name) VALUES (default, %s);"
+    params = (name,)
+    cursor.execute(query, params)
     db.commit()
     db.close()
     
@@ -82,8 +83,9 @@ def reportMatch(winner, loser):
       loser:  the id number of the player who lost
     """
     db, cursor = connect()
-    query = ("INSERT INTO rounds(Winner, Loser) VALUES (%s, %s);")
-    cursor.execute(query, (winner, loser,))
+    query = "INSERT INTO rounds(Winner, Loser) VALUES (%s, %s);"
+    params = (winner, loser,)
+    cursor.execute(query, params)
     db.commit()
     db.close()
  
