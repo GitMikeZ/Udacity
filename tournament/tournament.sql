@@ -10,26 +10,23 @@ DROP DATABASE IF EXISTS tournament;
 
 CREATE DATABASE tournament;
 
-DROP TABLE IF EXISTS players CASCADE;
-DROP TABLE IF EXISTS rounds CASCADE;
-DROP VIEW IF EXISTS standings CASCADE;
-
 \c tournament
 
 CREATE TABLE players(
-    player_id serial PRIMARY KEY,
-    player_name text
+    id serial PRIMARY KEY,
+    name text
 );
 
 CREATE TABLE rounds(
-    player_id serial PRIMARY KEY,
-    winner integer references players(player_id),
-    loser integer references players(player_id)
+    id serial PRIMARY KEY,
+    winner integer,
+    loser integer
 );
 
 CREATE VIEW standings AS
-SELECT players.player_id, players.player_name, FROM players
-(SELECT count(*) FROM rounds WHERE rounds.winner = players.player_id) as gameWon,
-(SELECT count(*) FROM rounds WHERE players.player_id in (winner, loser)) as gamePlayed
-GROUP BY players.player_id
-ORDER BY gameWon DESC;
+SELECT temp.id as id, temp.name,
+(SELECT count(*) FROM rounds WHERE rounds.winner = temp.id) as won,
+(SELECT count(*) FROM rounds where temp.id in (winner, loser)) as matches
+FROM players temp
+GROUP BY temp.id
+ORDER BY won DESC;

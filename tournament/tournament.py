@@ -13,7 +13,8 @@ def deleteMatches():
     """Remove all the match records from the database."""
     conn = connect()
     c = conn.cursor()
-    c.execute("DELETE FROM rounds")
+    query = "DELETE FROM rounds"
+    c.execute(query)
     conn.commit()
     conn.close()
 
@@ -21,7 +22,8 @@ def deletePlayers():
     """Remove all the player records from the database."""
     conn = connect()
     c = conn.cursor()
-    c.execute("DELETE FROM players")
+    query = "DELETE FROM players"
+    c.execute(query)
     conn.commit()
     conn.close()
 
@@ -29,7 +31,7 @@ def countPlayers():
     """Returns the number of players currently registered."""
     conn = connect()
     c = conn.cursor()
-    query = ("SELECT count(players.player_id) as num from players")
+    query = ("SELECT count(players.id) as num from players")
     c.execute(query)
     num = c.fetchone()[0]
     conn.close()
@@ -46,8 +48,7 @@ def registerPlayer(name):
     """
     conn = connect()
     c = conn.cursor()
-    query = ("INSERT INTO players(player_id, player_name)"
-		     "VALUES (default, %s);")
+    query = ("INSERT INTO players(id, name) VALUES (default, %s);")
     c.execute(query, (name,))
     conn.commit()
     conn.close()
@@ -67,7 +68,8 @@ def playerStandings():
     """
     conn = connect()
     c = conn.cursor()
-    c.execute("SELECT * from standings;")
+    query = "SELECT * FROM standings;"
+    c.execute(query)
     standing = c.fetchall()
     conn.close()
     return standing
@@ -89,7 +91,7 @@ def reportMatch(winner, loser):
 def swissPairings():
     """Returns a list of pairs of players for the next round of a match.
   
-    Assuming that there are an even number of players registered, each player
+    Assuming that there are an even number of players registereds, each player
     appears exactly once in the pairings.  Each player is paired with another
     player with an equal or nearly-equal win record, that is, a player adjacent
     to him or her in the standings.
@@ -101,22 +103,16 @@ def swissPairings():
         id2: the second player's unique id
         name2: the second player's name
     """
-    conn = connect()
-    c = conn.cursor()
-    query = "SELECT * FROM standings"
-    c.execute(query)
-    results = c.fetchall()
-    pairs = []
-    count = len(results)
+    stand = playerStandings()
+    swissPair = []
     i = 0
-    while i < len(results):
-        pair_list = (results[i][0], results[i][1], 
-		     results[i+1][0], results[i+1][1])
-        pairs.append(pair_list)
-	i = i + 2;
-
-    c.close()
-    return pairs
+    playerNum = countPlayers()
+    while i < playerNum:
+        pair_list = (stand[i][0], stand[i][1], 
+                     stand[i+1][0], stand[i+1][1])
+        swissPair.append(pair_list)
+        i = i + 2;
+    return swissPair
     
 
 
