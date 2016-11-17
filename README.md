@@ -4,28 +4,36 @@ A swiss tournament psql database schema used to store a game between players and
 
 ## Funcionalities of tournament.py
 connect()
+
     -Connects to PostgreSQL database and return connection
 
 deleteMatches()
+
     -Remove all match records of the swiss game from the db
 
 deletePlayers()
+
     -Remove all player records from the db
 
 countPlayers()
+
     -Retruns the number of players within the swiss game
 
 registerPlayers(name)
+
     -Registers a player
 
-playerStanding
+playerStanding()
+
     -Returns a list of id, name, wins nad matches of all players sorted
      by wins
 
-reportMatch
+reportMatch()
+
     -Records into the db the winner and loser of a single match
 
 swissPairings()
+
     -Returns a list of id1, name1, id2, name2 of the swiss game
 
 ## Run
