@@ -46,7 +46,8 @@ def registerPlayer(name):
     """
     conn = connect()
     c = conn.cursor()
-    query = ("INSERT INTO players(player_id, player_name) VALUES (default, %s);")
+    query = ("INSERT INTO players(player_id, player_name)"
+		     "VALUES (default, %s);")
     c.execute(query, (name,))
     conn.commit()
     conn.close()
@@ -109,7 +110,8 @@ def swissPairings():
     count = len(results)
 
     for i in range(0, count - 1, 2):
-        pair_list = (results[i][0], results[i][1], results[i+1][0], results[i+1][1])
+        pair_list = (results[i][0], results[i][1], 
+					 results[i+1][0], results[i+1][1])
         pairs.append(pair_list)
 
     c.close()
