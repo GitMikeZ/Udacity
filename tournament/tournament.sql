@@ -19,8 +19,8 @@ CREATE TABLE players(
 
 CREATE TABLE rounds(
     id serial PRIMARY KEY,
-    winner integer,
-    loser integer
+    winner integer references players(id),
+    loser integer references players(id)
 );
 
 CREATE VIEW standings AS
