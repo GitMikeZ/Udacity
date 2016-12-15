@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                <form method="post">
+                    <div class="row">
+                    <input type="hidden" id="post_id" name="post_id" value="{{post_id}}">
+                    <label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>Edit your Comment:</h3>
+                            </div>
+                        </div>
+                        <input type="text" id="comment" name="comment" value="{{comment}}">
+                    </label>
+                    </div>
+                    {% if error %}
+                        {{error}}
+                    {% endif %}
+                    <div class="row">
+                    <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+      </div>
+{% endblock %}
