@@ -9,20 +9,23 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-      <a id="post-delete" class="pull-right" href="/deletepost/{{post.key().id()}}">Delete Post</a>
+      <a id="post-delete" class="pull-right" href="/mublog/deletepost/{{post.key().id()}}">Delete Post</a>
       <br>
     </div>
   </div>
   <div class="row">
     <div class="col-md-4">
-      <input type="hidden" id="like" name="like" value="update">
-      <button type="submit">Like {{numLikes}}</button>
+      <form method="post" role="form" class="comment-form">
+        <input type="hidden" id="like" name="like" value="update">
+        <button type="submit">Like {{numLikes}}</button>
+      </form>
     </div>
     <div class="col-md-8">
-      <a id="post-edit" class="pull-right" href="/editpost/{{post.key().id()}}">Edit Post</a>
+      <a id="post-edit" class="pull-right" href="/mublog/editpost/{{post.key().id()}}">Edit Post</a>
       <br>
     </div>
   </div>
+  <br>
   {{post.render() | safe}}
   <br>
   <div class="row">
@@ -40,9 +43,9 @@
               {% for c in comments %}
                 <h3>{{ c.getUser() }}</h3>
                 <p>{{ c.comment }}</p>
-                <a class="comment-delete" href="/deletecomment/{{post.key().id()}}/{{c.key().id()}}">Delete Comment</a>
+                <a class="comment-delete" href="/mublog/deletecomment/{{post.key().id()}}/{{c.key().id()}}">Delete Comment</a>
                 <br>
-                <a class="comment-edit" href="/editcomment/{{post.key().id()}}/{{c.key().id()}}">Edit Comment</a>
+                <a class="comment-edit" href="/mublog/editcomment/{{post.key().id()}}/{{c.key().id()}}">Edit Comment</a>
                 <br>
               {% endfor %}
             {% endif %}

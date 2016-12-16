@@ -15,7 +15,7 @@
                         <br>
                         (<a class="login-link" href="/logout">logout</a>)
                             <div class="new-post">
-                                <a class="login-link" href="/newpost">New Post</a>
+                                <a class="login-link" href="/mublog/newpost">New Post</a>
                             </div>
                     {% else %}
                         <a class="login-link" href="/login">login</a>
@@ -23,9 +23,14 @@
                         <a class="login-link" href="/signup">signup</a>
                     {% endif %}
                 </div>
+                <div class="col-md-8">
+                </div>
+                <div class="col-md-2">
+                      <a class="home-link pull-right" href="/">Front Page</a>
+                </div>
             </div>
             <div class="row main-title">
-                <a class="blog-front" href="/">The Amazing Blog</a>
+                The Amazing Blog
             </div>
             <div id="content">
                 {% block content %}
