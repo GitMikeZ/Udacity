@@ -15,10 +15,10 @@ To view the page, click on the following link:
 
 ## Sources
 
-https://developers.google.com/maps/
-http://knockoutjs.com/
-http://www.w3schools.com/
-https://stackoverflow.com/
+https://developers.google.com/maps/ <br/>
+http://knockoutjs.com/ <br/>
+http://www.w3schools.com/ <br/>
+https://stackoverflow.com/ <br/>
 https://www.mediawiki.org/wiki/API:Main_page
 
 
