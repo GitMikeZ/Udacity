@@ -11,7 +11,7 @@ Data request also has error handling and code is separted following a MVVM patte
 
 ## Run
 
-To view the page, click on the following link:
+To view the page, download the repository and open the map.html file.
 
 ## Sources
 
