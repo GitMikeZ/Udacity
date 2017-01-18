@@ -1,7 +1,13 @@
-// Map variable
+/*
+* @description A varaible in the global namespace called 'map'.
+* @type {object}
+*/
 var map;
 
-// Attraction array to display on google map with name, longitude, and latitude
+/*
+* @description A varaible in the global namespace called 'Attractions'.
+* @type {Array}
+*/
 var Attractions = [
    {
         name: 'Big Ben',
@@ -95,39 +101,44 @@ var Attractions = [
     }
 ];
 
-// Marker object to place on the map
+/*
+* @constructor
+* @param {Object[]} Attractions
+* @description Creates an instance of markerObject.
+*/
 function markerObject(a) {
 	var self = this;
 
-    this.name = a.name;
-	this.lat = a.lat;
-	this.long = a.lng;
-    this.description = "";
+    self.name = a.name;
+	self.lat = a.lat;
+	self.long = a.lng;
+    self.description = "";
 
-	this.visible = ko.observable(true);
+	self.visible = ko.observable(true);
 
     var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + a.name + '&format=json&callback=wikiCallback';
 
     $.ajax({
         url: wikiUrl,
         dataType: "jsonp",
-        success: function( response ) {
-                self.description = response[2][1];
-        }
-    })
+    }).done(function( response ) {
+        self.description = response[2][1];
+    }).fail(function(jqXHR, exception) {
+        alert("Error in loading Wikimedia API");
+    });
 
-	this.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
+	self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
                         '<div class="content">' + self.description + "</div></div>";
 
-	this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
+	self.infoWindow = new google.maps.InfoWindow({content: self.contentString});
 
-	this.marker = new google.maps.Marker({
+	self.marker = new google.maps.Marker({
 			position: new google.maps.LatLng(a.lat, a.lng),
 			map: map,
 			title: a.name
 	});
 
-	this.marker.addListener('click', function(){
+	self.marker.addListener('click', function(){
 		self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
         '<div class="content">' + self.description + "</div><div>";
 
@@ -138,24 +149,22 @@ function markerObject(a) {
 		self.marker.setAnimation(google.maps.Animation.BOUNCE);
       	setTimeout(function() {
       		self.marker.setAnimation(null);
-     	}, 5000);
+     	}, 3500);
 	});
 
-	this.bounce = function(place) {
+	self.bounce = function(place) {
 		google.maps.event.trigger(self.marker, 'click');
 	};
 
-    this.showMarker = ko.computed(function() {
-        if(this.visible()) {
-            this.marker.setMap(map);
-        } else {
-            this.marker.setMap(null);
-        }
+    self.showMarker = ko.computed(function() {
+        self.marker.setVisible(self.visible());
         return true;
 	}, this);
-};
+}
 
-// Initialize the Google map centering at uluru
+/*
+* @description Initialize google maps.
+*/
 function initMap() {
 
     var uluru = {lat: 51.5074, lng: -0.1278};
@@ -163,21 +172,23 @@ function initMap() {
         zoom: 13,
         center: uluru
     });
-};
+}
 
-// Model-view-viewmodel of the app
+/*
+* @description  Model-view-viewmodel of the app.
+*/
 function modelViewViewModel() {
 	var self = this;
-    this.attractionList = ko.observableArray([]);
-	this.filterTerm = ko.observable("");
+    self.attractionList = ko.observableArray([]);
+	self.filterTerm = ko.observable("");
 
     initMap();
 
-	for( var i = 0; i < Attractions.length; i++ ) {
-        self.attractionList.push( new markerObject(Attractions[i]));
-    };
+    Attractions.forEach( function( attraction ) {
+         self.attractionList.push( new markerObject(attraction) );
+    });
 
-	this.filteredList = ko.computed( function() {
+	self.filteredList = ko.computed( function() {
 		var filter = self.filterTerm().toLowerCase();
 		if (filter) {
             return ko.utils.arrayFilter(self.attractionList(), function(attraction) {
@@ -186,15 +197,17 @@ function modelViewViewModel() {
 				return result;
 			});
 		} else {
-            for( var j = 0; j < self.attractionList.length; j++ ) {
-                self.attractionList[j].visible(true);
-            }
+            self.attractionList().forEach( function( a )  {
+                a.visible(true);
+            });
 			return self.attractionList();
 		}
 	}, self);
-};
+}
 
-// Initialize the app
+/*
+* @description Initialize the app.
+*/
 function initialize() {
     ko.applyBindings(new modelViewViewModel());
 }
