@@ -1,142 +1,202 @@
+// Map variable
 var map;
-var markers = [];
 
-this.attractions = [
-    'London Eye', 51.5033, -0.1195, 'L'],
-    ['Tower of London', 51.5081, -0.0759, 'T'],
-    ['St Paul Cathedral', 51.5138, -0.0984, 'P'],
-    ['Buckingham Palace', 51.5014, -0.1419, 'B'],
-    ['Westminster Abbey', 51.4993, -0.1273, 'W'],
-    ['Big Ben', 51.5007, -0.1246, 'B'],
-    ['British Museum', 51.5194, -0.1270, 'B'],
-    ['Palace of Westminster', 51.4995, -0.1248, 'P'],
-    ['Tower Bridge', 51.5055, -0.0754, 'T'],
-    ['London Dungeon', 51.5025, -0.1188, 'L'],
-    ['Kensington Palace', 51.5058, -0.1877, 'K'],
-    ['Tate Modern', 51.5074, -0.1001, 'T'],
-    ['Natural History Museum', 51.4967, -0.1764, 'N'],
-    ['National Gallery', 51.5089, -0.1283, 'N'],
-    ['St James Park', 51.5025, -0.1348, 'J'],
-    ['Sea Life London Aquarium', 51.5020, -0.1196, 'S'],
-    ['HMS Belfast', 51.5066, -0.0814, 'H'],
-    ['Hyde Park', 51.5073, -0.1657, 'H'],
-    ['London Aquarium', 51.5020, -0.1196, 'A']
+// Attraction array to display on google map with name, longitude, and latitude
+var Attractions = [
+   {
+        name: 'Big Ben',
+        lat: 51.5007,
+        lng: -0.1246,
+   },
+   {
+        name: 'British Museum',
+        lat: 51.5194,
+        lng: -0.1270,
+   },
+   {
+        name: 'Buckingham Palace',
+        lat: 51.5014,
+        lng: -0.1419,
+   },
+   {
+        name: 'London Eye',
+        lat: 51.5033,
+        lng: -0.1195,
+    },
+    {
+        name: 'Tower of London',
+        lat: 51.5081,
+        lng: -0.0759,
+    },
+    {
+        name: 'St Paul Cathedral',
+        lat: 51.5138,
+        lng: -0.0984,
+    },
+    {
+        name: 'Westminster Abbey',
+        lat: 51.4993,
+        lng: -0.1273,
+    },
+    {
+        name: 'Palace of Westminster',
+        lat: 51.4995,
+        lng: -0.1248,
+    },
+    {
+        name: 'London Tower Bridge',
+        lat: 51.5055,
+        lng: -0.0754,
+    },
+    {
+        name: 'London Dungeon',
+        lat: 51.5027,
+        lng: -0.1194,
+    },
+    {
+        name: 'Kensington Palace',
+        lat: 51.5058,
+        lng: -0.1877,
+    },
+    {
+        name: 'Tate Modern',
+        lat: 51.5074,
+        lng: -0.1001,
+    },
+    {
+        name: 'London Natural History Museum',
+        lat: 51.4967,
+        lng: -0.1764,
+    },
+    {
+        name: 'London National Gallery',
+        lat: 51.5089,
+        lng: -0.1283,
+    },
+    {
+        name: 'St James Park',
+        lat: 51.5025,
+        lng: -0.1348,
+    },
+    {
+        name: 'Sea Life London Aquarium',
+        lat: 51.5020,
+        lng: -0.1196,
+    },
+    {
+        name: 'London HMS Belfast',
+        lat: 51.5066,
+        lng: -0.0814,
+    },
+    {
+        name: 'London Hyde Park',
+        lat: 51.5073,
+        lng: -0.1657,
+    }
 ];
 
+// Marker object to place on the map
+function markerObject(a) {
+	var self = this;
+
+    this.name = a.name;
+	this.lat = a.lat;
+	this.long = a.lng;
+    this.description = "";
+
+	this.visible = ko.observable(true);
+
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + a.name + '&format=json&callback=wikiCallback';
+
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        success: function( response ) {
+                self.description = response[2][1];
+        }
+    })
+
+	this.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
+                        '<div class="content">' + self.description + "</div></div>";
+
+	this.infoWindow = new google.maps.InfoWindow({content: self.contentString});
+
+	this.marker = new google.maps.Marker({
+			position: new google.maps.LatLng(a.lat, a.lng),
+			map: map,
+			title: a.name
+	});
+
+	this.marker.addListener('click', function(){
+		self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
+        '<div class="content">' + self.description + "</div><div>";
+
+        self.infoWindow.setContent(self.contentString);
+
+		self.infoWindow.open(map, this);
+
+		self.marker.setAnimation(google.maps.Animation.BOUNCE);
+      	setTimeout(function() {
+      		self.marker.setAnimation(null);
+     	}, 5000);
+	});
+
+	this.bounce = function(place) {
+		google.maps.event.trigger(self.marker, 'click');
+	};
+
+    this.showMarker = ko.computed(function() {
+        if(this.visible()) {
+            this.marker.setMap(map);
+        } else {
+            this.marker.setMap(null);
+        }
+        return true;
+	}, this);
+};
+
+// Initialize the Google map centering at uluru
 function initMap() {
 
-    var self = this;
-
     var uluru = {lat: 51.5074, lng: -0.1278};
-
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 13,
         center: uluru
     });
-    marker = new google.maps.Marker({
-        position: uluru,
-        map: map
-    });
-
-    for( var i = 0; i < attractions.length; i++ ) {
-        addMarker(attractions[i]);
-    }
 };
 
-function addMarker(m) {
+// Model-view-viewmodel of the app
+function modelViewViewModel() {
+	var self = this;
+    this.attractionList = ko.observableArray([]);
+	this.filterTerm = ko.observable("");
 
-    var title = m[0];
-    var pos = new google.maps.LatLng(m[1], m[2]);
-    var cat = m[3];
+    initMap();
 
-    tempMarker = new google.maps.Marker({
-        title: title,
-        position: pos,
-        category: cat,
-        map: map
-    });
+	for( var i = 0; i < Attractions.length; i++ ) {
+        self.attractionList.push( new markerObject(Attractions[i]));
+    };
 
-    tempMarker.setAnimation(null);
-
-    (function(tempMarker) {
-        google.maps.event.addListener(tempMarker, "click", function(e) {
-            if (tempMarker.getAnimation() !== null ) {
-                tempMarker.setAnimation(null);
-            } else {
-                tempMarker.setAnimation(google.maps.Animation.BOUNCE);
+	this.filteredList = ko.computed( function() {
+		var filter = self.filterTerm().toLowerCase();
+		if (filter) {
+            return ko.utils.arrayFilter(self.attractionList(), function(attraction) {
+				var result = (attraction.name.toLowerCase().search(filter) >= 0);
+				attraction.visible(result);
+				return result;
+			});
+		} else {
+            for( var j = 0; j < self.attractionList.length; j++ ) {
+                self.attractionList[j].visible(true);
             }
-        })
-    })(tempMarker);
-
-    markers.push(tempMarker);
-}
-
-
-filterMarkers = function(cat) {
-    for (var j = 0; j < attractions.length; j++) {
-        marker = markers[j];
-        if (marker.category == cat || cat.length == 0 ) {
-            marker.setVisible(true);
-        } else {
-            marker.setVisible(false);
-        }
-    }
-}
-
-function ViewModel() {
-
-}
-
-function loadScript() {
-    var link = "https://maps.googleapis.com/maps/api/js?callback=initMap";
-
-    var jscript = document.createElement('script');
-    jscript.type = "text/javascript"
-    jscript.src = link;
-    jscript.async;
-    jscript.defer;
-    document.getElementsByTagName('body')[0].appendChild(jscript);
+			return self.attractionList();
+		}
+	}, self);
 };
 
-ko.applyBindings(new ViewModel());
-ko.applyBindings(new loadScript());
-
-/*
-function myFunction() {
-    var input, filter, ul, li, a, i;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
+// Initialize the app
+function initialize() {
+    ko.applyBindings(new modelViewViewModel());
 }
 
-    this.attractions = ko.observableArray([
-        'Big Ben',
-        'British Museum',
-        'Buckingham Palace',
-        'HMS Belfast',
-        'Hyde Park',
-        'Kensington Palace',
-        'London Aquarium',
-        'London Dungeon',
-        'London Eye',
-        'National Gallery',
-        'Natural History Museum',
-        'Palace of Westminster',
-        'Sea Life London Aquarium',
-        'St James Park',
-        'St Paul Cathedral',
-        'Tower of London',
-        'Tower Bridge',
-        'Tate Modern',
-        'Westminster Abbey'
-    ]);
-*/
+

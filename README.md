@@ -1,21 +1,25 @@
-﻿# Item Catalog
+﻿# Neighborhood Map
 
-An application that displays hockey teams as a list with a varioty of players that play
-different positions as categories. The data is taken from a self-made database that can be
-displayed using JSON on the app.
-Signed up users can signup to the app through oauth who than can post, edit, and edit teams and players.
+A single page application featuring a map of London England from Google Map API with markers positioned at various attractions.
+In addition, the application has a side navigation that slides from the left with a filter bar that filters the list of attractions
+according to the users input.
 
+The page is also implemented by thrid-party APIs from wikipedia that when the user clicks the marker, additional information about
+the location is displayed.
+
+Data request also has error handling and code is separted following a MVVM pattern.
 
 ## Run
 
-1. Install Vagrant and VirtualBox
-2. Clone this repository
-3. Launch Git shell and navigate into the repository.
-4. Initialize Vagrant VM using commands: 'vagrant up' and 'vagrant ssh'
-5. Type: python catalog.py
-6. The application should render in a webbrowser on: localhost:5000
+To view the page, click on the following link:
 
+## Sources
 
+https://developers.google.com/maps/
+http://knockoutjs.com/
+http://www.w3schools.com/
+https://stackoverflow.com/
+https://www.mediawiki.org/wiki/API:Main_page
 
 
 
