@@ -5,6 +5,12 @@
 var map;
 
 /*
+* @description A varaible in the global namespace called 'infoWindow'.
+* @type {object}
+*/
+var infoWindow;
+
+/*
 * @description A varaible in the global namespace called 'Attractions'.
 * @type {Array}
 */
@@ -122,15 +128,14 @@ function markerObject(a) {
         url: wikiUrl,
         dataType: "jsonp",
     }).done(function( response ) {
-        self.description = response[2][1];
-    }).fail(function(jqXHR, exception) {
+        if ( response[2][1] == undefined ) {
+            self.description = "";
+        } else {
+            self.description = response[2][1];
+        }
+    }).fail(function() {
         alert("Error in loading Wikimedia API");
     });
-
-	self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
-                        '<div class="content">' + self.description + "</div></div>";
-
-	self.infoWindow = new google.maps.InfoWindow({content: self.contentString});
 
 	self.marker = new google.maps.Marker({
 			position: new google.maps.LatLng(a.lat, a.lng),
@@ -138,18 +143,23 @@ function markerObject(a) {
 			title: a.name
 	});
 
+    self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
+                    '<div class="content">' + self.description + "</div></div>";
+
+	infoWindow = new google.maps.InfoWindow({content: self.contentString});
+
 	self.marker.addListener('click', function(){
 		self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
         '<div class="content">' + self.description + "</div><div>";
 
-        self.infoWindow.setContent(self.contentString);
+        infoWindow.setContent(self.contentString);
 
-		self.infoWindow.open(map, this);
+		infoWindow.open(map, this);
 
 		self.marker.setAnimation(google.maps.Animation.BOUNCE);
       	setTimeout(function() {
       		self.marker.setAnimation(null);
-     	}, 3500);
+     	}, 2100);
 	});
 
 	self.bounce = function(place) {
@@ -180,7 +190,7 @@ function initMap() {
 function modelViewViewModel() {
 	var self = this;
     self.attractionList = ko.observableArray([]);
-	self.filterTerm = ko.observable("");
+	self.filterTerm = ko.observable('');
 
     initMap();
 
@@ -206,10 +216,19 @@ function modelViewViewModel() {
 }
 
 /*
+* @description Error handling for Google maps
+*/
+function errorHandlingFunction() {
+    alert("Error in loading Google MapsAPI.");
+}
+
+/*
 * @description Initialize the app.
 */
 function initialize() {
     ko.applyBindings(new modelViewViewModel());
 }
+
+
 
 
