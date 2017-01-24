@@ -1,6 +1,6 @@
 ﻿# Item Catalog
 
-An application that displays hockey teams as a list with a varioty of players that play
+An application that displays hockey teams as a list with a variety of players that play
 different positions as categories. The data is taken from a self-made database that can be
 displayed using JSON on the app.
 Signed up users can signup to the app through oauth who than can post, edit, and edit teams and players.
