@@ -1,25 +1,18 @@
-﻿# Neighborhood Map
+﻿# Movie Trailer Website
 
-A single page application featuring a map of London England from Google Map API with markers positioned at various attractions.
-In addition, the application has a side navigation that slides from the left with a filter bar that filters the list of attractions
-according to the users input.
+A single page website with a list of famous movies displayed by their box art. Clicking on the art will re-direct the viewer to
+the respectable trailer for the movie on youtube.
 
-The page is also implemented by thrid-party APIs from wikipedia that when the user clicks the marker, additional information about
-the location is displayed.
+## To Run
 
-Data request also has error handling and code is separted following a MVVM pattern.
+To view the page, download the .zip file to this project or clone this repository.
 
-## Run
+Open up a command prompt and navigate to this project's path and enter the command:
 
-To view the page, download the repository and open the index.html file.
+python entertainment_website.py
 
-## Sources
 
-https://developers.google.com/maps/ <br/>
-http://knockoutjs.com/ <br/>
-http://www.w3schools.com/ <br/>
-https://stackoverflow.com/ <br/>
-https://www.mediawiki.org/wiki/API:Main_page
+
 
 
 
