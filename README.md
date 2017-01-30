@@ -11,6 +11,8 @@ In addition, users can like or comment posts made by other users.
 4. Follow the the instructions to initialize gcloud such as configuration and project
 5. cd into the blog's directory with the repository and type: dev_appserver.py app.yaml
 
+Or, you can check out the blog at: https://udacity-148907.appspot.com/
+
 
 
 
