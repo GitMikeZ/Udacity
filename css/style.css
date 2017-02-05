@@ -1,0 +1,71 @@
+body {
+    background-color: #3a73a9;
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
+#map {
+    margin-top:80px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #000;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    padding: 10px;
+}
+
+.search-box {
+    flex-grow: 1;
+    height: 40px;
+    font-size: 1em;
+    padding: 1px;
+}
+
+.list {
+    order: 1;
+    flex-grow: 1;
+    background-color: #111;
+    list-style:none;
+    padding-left:0;
+}
+
+.results {
+    margin: 0;
+    padding: 0;
+}
+
+.place {
+    margin: 3px;
+    padding: 3px;
+    list-style: none;
+}
+
+.li {
+    background-color: #F0FFF0;
+}
