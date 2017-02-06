@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/static/bootstrap,min.css"/>
+    <link type="text/css" rel="stylesheet" href="/static/styles.css"/>
+    <title>The Amazing Blog</title>
+    <header>
+        <center><h1>Welcome to the Amazing Blog<h1></center>
+    </header>
+  </head>
+  <body>
+    <center>
+    <hr>
+    <h2>Signup</h2>
+    <form method="post">
+      <table>
+        <tr>
+          <td class="label">
+            Username
+          </td>
+          <td>
+            <input type="text" name="username" value="{{username}}">
+          </td>
+          <td class="error">
+            {{error_username}}
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            Password
+          </td>
+          <td>
+            <input type="password" name="password" value="">
+          </td>
+          <td class="error">
+            {{error_password}}
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            Verify Password
+          </td>
+          <td>
+            <input type="password" name="verify" value="">
+          </td>
+          <td class="error">
+            {{error_verify}}
+          </td>
+        </tr>
+        <tr>
+          <td class="label">
+            Email (optional)
+          </td>
+          <td>
+            <input type="text" name="email" value="{{email}}">
+          </td>
+          <td class="error">
+            {{error_email}}
+          </td>
+        </tr>
+      </table>
+      <br>
+      <input type="submit" name="action" value="signup">
+      <br><br>
+      <input type="submit" name="action" value="Already have an account? Login here!">
+    </form>
+  </body>
+  </center>
+</html>
