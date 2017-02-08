@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+{% block content %}
+{% include "header.html" %}
+        <div class="container">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-8">
+                <h1> Are you sure you want to delete {{player.name}}? </h1>
+                    <form action="{{ url_for('deletePlayer',team_id = player.team_id, player_id=player.id)}}" method = 'post'>
+                        <input type='submit', value = 'Delete'>
+                    </form>
+            <a href = "{{ url_for('showTeams', player_id = player_id)}}"> Cancel </a>
+            </div>
+            <div class="col-md-2">
+            </div>
+{% endblock %}
