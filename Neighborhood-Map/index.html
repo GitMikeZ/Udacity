@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title>Neighborhood Map</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container-fluid">
+		<nav>
+			<div class="row nav-bar">
+				<div id="main">
+					<button class="w3-btn w3-black w3-xlarge" onclick="openNav()"><i class="fa fa-bars"></i></button>
+				</div>
+			</div>
+		</nav>
+	<aside>
+		<div id="mySidenav" class="sidenav">
+			<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+			<h2>Attractions</h2>
+			<div class="list" id="list">
+				<div class="search" id="search" div style="overflow: hidden; padding-right: .5em;">
+					<input class="search-box" id="search-box" data-bind="textInput: filterTerm, valueUpdate: 'afterkeydown'" />
+				</div>
+				<ul class="results" id="results" data-bind="foreach: filteredList">
+					<li class="place" id="place" data-bind="text: name, click: bounce"></li>
+				</ul>
+			</div>
+		</div>
+	</aside>
+	<main>
+		<article>
+			<div class="map" id="map">Error loading Google Maps.</div>
+		</article>
+	</main>
+	<script src='js/jquery-3.1.1.min.js'></script>
+	<script src='js/knockout-3.4.1.js'></script>
+	<script src="js/nav.js"></script>
+	<script src='js/app.js'></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA6qoUKQ3WJQd4ZxAahhFPM80WJbw-yws&callback=initialize&" onerror="errorHandlingFunction()" async defer></script>
+	</div>
+</body>
+</html>

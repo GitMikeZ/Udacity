@@ -1,0 +1,22 @@
+{% extends "main.html" %} 
+{% block content %}
+
+<div class='col-md-8 col-lg-8'>
+
+  <h1>New Category </h1>
+  <div class='error'> {{error}}</div>
+
+  <form action="{{url_for('newCategory')}}" method='POST'>
+    <p> Name: </p>
+    <input type='text' size='30' name='name'>
+
+    <input type="submit" value='create'>
+
+
+  </form>
+
+
+</div>
+
+
+{% endblock %}

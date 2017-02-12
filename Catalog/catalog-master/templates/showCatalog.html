@@ -1,0 +1,19 @@
+{% extends "main.html" %} 
+{% block content %}
+{% include "categories.html" %}
+
+<div class='col-md-6 col-lg-6 text-center'>
+  <h2>Latest Item</h2>
+  <ul class="list-unstyled">
+    {% for item in items %}
+    <li><a href="{{url_for('showItem',category_id= item.category_id ,item_id=item.id)}}">{{item.name}}</a>({{item.category_name}})</li>
+
+
+    {% endfor %}
+
+  </ul>
+
+</div>
+
+
+{% endblock %}

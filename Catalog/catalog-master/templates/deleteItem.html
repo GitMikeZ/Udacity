@@ -1,0 +1,21 @@
+{% extends "main.html" %}
+{% block content %}
+	
+		<div class='col-md-8 col-lg-8'>
+
+			<h1>Delete item  </h1>
+
+				<form action="#" method = 'POST'>
+				<p> Are you sure you want to delete {{item.name}} from {{ category_name}}</p>
+
+				<input type="submit" value='delete'>
+
+
+				</form>
+
+
+		</div>
+
+		
+	
+{% endblock %}
