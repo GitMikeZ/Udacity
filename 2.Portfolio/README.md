@@ -1,16 +1,16 @@
-﻿# Movie Trailer Website
+﻿# Portfolio
 
-A single page website with a list of famous movies displayed by their box art. Clicking on the art will re-direct the viewer to
-the respectable trailer for the movie on youtube.
+A responsive website that displays images with written descriptions that links to each portfolio project.
 
-## To Run
+## Cloning the repo
 
-To view the page, download the .zip file to this project or clone this repository.
+If you have an internet connection, you could create a fresh clone of the repo using the command below:
 
-Open up a command prompt and navigate to this project's path and enter the command:
+<pre><code> git clone https://github.com/GitMikeZ/Udacity</code></pre>
 
-python entertainment_website.py
+## Tests
 
+To view the website, simply open the index.html file in any web browser.
 
 
 
