@@ -1,15 +1,18 @@
-﻿# Movie Trailer Website
+﻿# Multi-User Blog
 
-A single page website with a list of famous movies displayed by their box art. Clicking on the art will re-direct the viewer to
-the respectable trailer for the movie on youtube.
+A blog website where users can sign up, login and post subjects and content.
+In addition, users can like or comment posts made by other users.
 
-## To Run
+## Run
 
-To view the page, download the .zip file to this project or clone this repository.
+1. Install Google App Engine SDK
+2. Clone this repository
+3. Launch Google cloud SDK shell and initialize it using command: gcloud init
+4. Follow the the instructions to initialize gcloud such as configuration and project
+5. cd into the blog's directory with the repository and type: dev_appserver.py app.yaml
 
-Open up a command prompt and navigate to this project's path and enter the command:
+Or, you can check out the blog at: https://udacity-148907.appspot.com/
 
-python entertainment_website.py
 
 
 
