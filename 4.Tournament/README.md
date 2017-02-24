@@ -2,7 +2,7 @@
 
 A swiss tournament psql database schema used to store a game between players and test various coded functions.
 
-## Funcionalities of tournament.py
+## Functionalities of tournament.py
 connect()
 
     -Connects to PostgreSQL database and return connection
