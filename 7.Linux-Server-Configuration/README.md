@@ -14,13 +14,17 @@ SSH Port: 2200 <br/>
 HTTP Port: 80 <br/>
 NTP Port: 123 <br/>
 
-### Finger Package Install (See packages.ubuntu.com)
+### Package Install (See packages.ubuntu.com)
 
 --sudo apt-get install finger
 
-## User Details
+## User Management
 
-Added User ID: grader <br/>
+Added User grader <br/>
+--sudo adduser grader <br/>
+
+Confirm User with Finger <br/>
+--finger grader
 
 grader SSH key: <br/>
 
