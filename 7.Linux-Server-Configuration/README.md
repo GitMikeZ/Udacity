@@ -16,15 +16,18 @@ NTP Port: 123 <br/>
 
 ### Package Install (See packages.ubuntu.com)
 
---sudo apt-get install finger
+-sudo apt-get install finger
+-sudo apt-get install apache2
+-sudo apt-get install libapache2-mod-wsgi
+-sudo apt-get install postgresql
 
 ## User Management
 
 Added User grader <br/>
---sudo adduser grader <br/>
+-sudo adduser grader <br/>
 
 Confirm User with Finger <br/>
---finger grader
+-finger grader
 
 grader SSH key: <br/>
 
@@ -34,12 +37,12 @@ Note: Remote login for user root is disabled
 
 ## Update and Upgrades
 
---sudo apt-get update <br/>
---sudo apt-get upgrade
+-sudo apt-get update <br/>
+-sudo apt-get upgrade
 
 ## Remove Unrequired packages
 
---sudo apt-get autoremove
+-sudo apt-get autoremove
 
 
 
