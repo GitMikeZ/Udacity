@@ -23,15 +23,24 @@ NTP Port: 123 <br/>
 
 ## User Management
 
-Added User grader <br/>
+Added user grader <br/>
 -sudo adduser grader <br/>
 
-Confirm User with Finger <br/>
--finger grader
+Giving grader sudo permission <br/>
+-sudo usermod -aG sudo grader<br/>
 
-grader SSH key: <br/>
+Confirm user with Finger <br/>
+-finger grader<br/>
 
 Note: Remote login for user root is disabled
+
+## Installing Public Key
+
+-mkdir .ssh
+-touch .ssh/authorized_keys
+-nano .ssh/authorized_keys
+-chmod 700 .ssh
+-chmod 644 .ssh/authorized_keys
 
 ## Timezone
 
