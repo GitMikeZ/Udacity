@@ -16,10 +16,10 @@ NTP Port: 123 <br/>
 
 ## Package Install from Ubuntu (See packages.ubuntu.com for descriptions)
 
-`sudo apt-get install finger`
-`sudo apt-get install apache2`
-`sudo apt-get install libapache2-mod-wsgi`
-`sudo apt-get install postgresql`
+`sudo apt-get install finger` <br/>
+`sudo apt-get install apache2` <br/>
+`sudo apt-get install libapache2-mod-wsgi` <br/>
+`sudo apt-get install postgresql` <br/>
 
 `sudo apt-get install git`
 
@@ -41,10 +41,10 @@ Note: Remote login for user root is disabled
 
 ## Installing Public Key
 
-`mkdir .ssh`
-`touch .ssh/authorized_keys`
-`nano .ssh/authorized_keys`
-`chmod 700 .ssh`
+`mkdir .ssh` <br/>
+`touch .ssh/authorized_keys` <br/>
+`nano .ssh/authorized_keys` <br/>
+`chmod 700 .ssh` <br/>
 `chmod 644 .ssh/authorized_keys`
 
 ## Install Flask, SQLAlchemy, and Oauth2
@@ -91,6 +91,7 @@ application.secret_key = 'SECRET KEY'
 
 ## Create and modify catalogapp.conf
 
+```
 <VirtualHost *:80>
             ServerName 54.208.105.233
             ServerAdmin grader@54.208.105.233
@@ -106,6 +107,7 @@ application.secret_key = 'SECRET KEY'
             LogLevel warn
             CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
+```
 
 ###Use a2dissite command to disable the 000-default configuration file
 
