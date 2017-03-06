@@ -16,14 +16,16 @@ NTP Port: 123 <br/>
 
 ## Package Install from Ubuntu (See packages.ubuntu.com for descriptions)
 
-`sudo apt-get install finger` <br/>
-`sudo apt-get install apache2` <br/>
-`sudo apt-get install libapache2-mod-wsgi` <br/>
-`sudo apt-get install postgresql` <br/>
+```
+sudo apt-get install finger
+sudo apt-get install apache2
+sudo apt-get install libapache2-mod-wsgi
+sudo apt-get install postgresql
 
-`sudo apt-get install git`
+sudo apt-get install git
+```
 
-Note: After modifying the WSGIScriptAlias, restart Apache <br/>
+**Note: After modifying the WSGIScriptAlias, restart Apache <br/>
 `sudo apache2ctl restart`
 
 ## User Management
@@ -41,18 +43,22 @@ Note: Remote login for user root is disabled
 
 ## Installing Public Key
 
-`mkdir .ssh` <br/>
-`touch .ssh/authorized_keys` <br/>
-`nano .ssh/authorized_keys` <br/>
-`chmod 700 .ssh` <br/>
-`chmod 644 .ssh/authorized_keys`
+```
+mkdir .ssh
+touch .ssh/authorized_keys
+nano .ssh/authorized_keys
+chmod 700 .ssh
+chmod 644 .ssh/authorized_keys
+```
 
 ## Install Flask, SQLAlchemy, and Oauth2
 
-`sudo apt-get install python-psycopg2 python-flask` <br/>
-`sudo apt-get install python-sqlalchemy python-pip` <br/>
-`sudo pip install oauth2client` <br/>
-`sudo pip install requests`
+```
+sudo apt-get install python-psycopg2 python-flask
+sudo apt-get install python-sqlalchemy python-pip
+sudo pip install oauth2client
+sudo pip install requests
+```
 
 ## Create postgresql user
 
@@ -68,13 +74,13 @@ Note: You can view all the databases using the command below:
 
 ## Clone repository from Catalog project
 
-cd /srv` <br/>
+```cd /srv`
 sudo mkdir Catalog` <br/>
 sudo chown www-data:www-data Catalog/` <br/>
 sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog
+```
 
-
-Note: Cloned repository's default branch must be set to the Catalog branch
+**Note: Cloned repository's default branch must be set to the Catalog branch
 
 ## Modify catalog.wsgi file to the following
 
