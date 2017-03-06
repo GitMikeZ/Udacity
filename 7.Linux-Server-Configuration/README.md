@@ -71,8 +71,42 @@ Note: You can view all the databases using the command below:
 `cd /srv`
 `sudo mkdir Catalog`
 `sudo chown www-data:www-data Catalog/`
+`sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog`
+
+Note: Cloned repository's default branch must be set to the Catalog branch
+
+## Modify catalog.wsgi file to the following
+
+`import sys`
+`import logging`
+`logging.basicConfig(stream=sys.stderr)`
+`sys.path.insert(0, '/srv/Catalog/Catalog')`
+``
+`from Catalog import app as application`
+``
+`application.secret_key = 'SECRET KEY'`
+
+## Create and modify catalogapp.conf
+
+<VirtualHost *:80>
+            ServerName 54.208.105.233
+            ServerAdmin grader@54.208.105.233
+            WSGIScriptAlias / /var/www/html/catalog.wsgi
+            <Directory /srv/Catalog/Catalog>
+                    Require all granted
+            </Directory>
+            Alias /static /srv/Catalog/Catalog/static
+            <Directory /srv/Catalog/Catalog/static/>
+                    Require all granted
+            </Directory>
+            ErrorLog ${APACHE_LOG_DIR}/error.log
+            LogLevel warn
+            CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
 
 ## Timezone
+
+
 
 ## Update and Upgrades
 
