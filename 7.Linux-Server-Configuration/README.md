@@ -104,9 +104,13 @@ Note: Cloned repository's default branch must be set to the Catalog branch
             CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 
+###Use a2dissite command to disable the 000-default configuration file
+
+`sudo a2dissite 000-default`
+
+`sudo a2ensite catalogapp`
+
 ## Timezone
-
-
 
 ## Update and Upgrades
 
