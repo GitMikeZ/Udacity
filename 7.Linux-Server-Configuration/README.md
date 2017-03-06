@@ -49,9 +49,9 @@ Note: Remote login for user root is disabled
 
 ## Install Flask, SQLAlchemy, and Oauth2
 
-`sudo apt-get install python-psycopg2 python-flask`
-`sudo apt-get install python-sqlalchemy python-pip`
-`sudo pip install oauth2client`
+`sudo apt-get install python-psycopg2 python-flask` <br/>
+`sudo apt-get install python-sqlalchemy python-pip` <br/>
+`sudo pip install oauth2client` <br/>
 `sudo pip install requests`
 
 ## Create postgresql user
@@ -68,23 +68,26 @@ Note: You can view all the databases using the command below:
 
 ## Clone repository from Catalog project
 
-`cd /srv`
-`sudo mkdir Catalog`
-`sudo chown www-data:www-data Catalog/`
-`sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog`
+cd /srv` <br/>
+sudo mkdir Catalog` <br/>
+sudo chown www-data:www-data Catalog/` <br/>
+sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog
+
 
 Note: Cloned repository's default branch must be set to the Catalog branch
 
 ## Modify catalog.wsgi file to the following
 
-`import sys`
-`import logging`
-`logging.basicConfig(stream=sys.stderr)`
-`sys.path.insert(0, '/srv/Catalog/Catalog')`
-``
-`from Catalog import app as application`
-``
-`application.secret_key = 'SECRET KEY'`
+```python
+import sys
+import logging
+logging.basicConfig(stream=sys.stderr)
+sys.path.insert(0, '/srv/Catalog/Catalog')
+
+from Catalog import app as application
+
+application.secret_key = 'SECRET KEY'
+```
 
 ## Create and modify catalogapp.conf
 
