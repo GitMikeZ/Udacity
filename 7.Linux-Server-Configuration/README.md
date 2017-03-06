@@ -25,7 +25,7 @@ sudo apt-get install postgresql
 sudo apt-get install git
 ```
 
-**Note: After modifying the WSGIScriptAlias, restart Apache <br/>
+**Note**: After modifying the WSGIScriptAlias, restart Apache <br/>
 `sudo apache2ctl restart`
 
 ## User Management
@@ -39,7 +39,7 @@ Giving grader sudo permission <br/>
 Confirm user with Finger <br/>
 `finger grader`<br/>
 
-Note: Remote login for user root is disabled
+**Note**: Remote login for user root is disabled
 
 ## Installing Public Key
 
@@ -68,19 +68,20 @@ sudo pip install requests
 
 `sudo -u postgres createdb -O grader catalogDB`
 
-Note: You can view all the databases using the command below:
+**Note**: You can view all the databases using the command below:
 
 `psql -U 'USER' -l`
 
 ## Clone repository from Catalog project
 
-```cd /srv`
-sudo mkdir Catalog` <br/>
-sudo chown www-data:www-data Catalog/` <br/>
+```
+cd /srv
+sudo mkdir Catalog
+sudo chown www-data:www-data Catalog
 sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog
 ```
 
-**Note: Cloned repository's default branch must be set to the Catalog branch
+**Note**: Cloned repository's default branch must be set to the Catalog branch
 
 ## Modify catalog.wsgi file to the following
 
