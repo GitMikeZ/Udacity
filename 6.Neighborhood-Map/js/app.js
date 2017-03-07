@@ -114,36 +114,36 @@ var Attractions = [
 */
 function markerObject(a) {
 	var self = this;
-
-    self.name = a.name;
+	
+	self.name = a.name;
 	self.lat = a.lat;
 	self.long = a.lng;
-    self.description = "";
+    	self.description = "";
 
 	self.visible = ko.observable(true);
 
-    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + a.name + '&format=json&callback=wikiCallback';
-
-    $.ajax({
-        url: wikiUrl,
-        dataType: "jsonp",
-    }).done(function( response ) {
-        if ( response[2][1] == undefined ) {
-            self.description = "";
-        } else {
-            self.description = response[2][1];
-        }
-    }).fail(function() {
-        alert("Error in loading Wikimedia API");
-    });
+	var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + a.name + '&format=json&callback=wikiCallback';
+	
+	$.ajax({
+		url: wikiUrl,
+		dataType: "jsonp",
+    	}).done(function( response ) {
+        	if ( response[2][1] == undefined ) {
+            		self.description = "";
+        	} else {
+            		self.description = response[2][1];
+        	}
+    	}).fail(function() {
+        	alert("Error in loading Wikimedia API");
+    	});
 
 	self.marker = new google.maps.Marker({
-			position: new google.maps.LatLng(a.lat, a.lng),
-			map: map,
-			title: a.name
+		position: new google.maps.LatLng(a.lat, a.lng),
+		map: map,
+		title: a.name
 	});
 
-    self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
+    	self.contentString = '<div class="info-window-content"><div class="title"><b>' + a.name + "</b></div>" +
                     '<div class="content">' + self.description + "</div></div>";
 
 	infoWindow = new google.maps.InfoWindow({content: self.contentString});
@@ -154,21 +154,21 @@ function markerObject(a) {
 
         infoWindow.setContent(self.contentString);
 
-		infoWindow.open(map, this);
+	infoWindow.open(map, this);
 
-		self.marker.setAnimation(google.maps.Animation.BOUNCE);
-      	setTimeout(function() {
-      		self.marker.setAnimation(null);
-     	}, 2100);
+	self.marker.setAnimation(google.maps.Animation.BOUNCE);
+      		setTimeout(function() {
+      			self.marker.setAnimation(null);
+     		}, 2100);
 	});
 
 	self.bounce = function(place) {
 		google.maps.event.trigger(self.marker, 'click');
 	};
 
-    self.showMarker = ko.computed(function() {
-        self.marker.setVisible(self.visible());
-        return true;
+    	self.showMarker = ko.computed(function() {
+        	self.marker.setVisible(self.visible());
+        	return true;
 	}, this);
 }
 
@@ -189,27 +189,28 @@ function initMap() {
 */
 function modelViewViewModel() {
 	var self = this;
-    self.attractionList = ko.observableArray([]);
+	self.attractionList = ko.observableArray([]);
 	self.filterTerm = ko.observable('');
 
-    initMap();
+    	initMap();
 
-    Attractions.forEach( function( attraction ) {
-         self.attractionList.push( new markerObject(attraction) );
-    });
+    	Attractions.forEach( function( attraction ) {
+        	self.attractionList.push( new markerObject(attraction) );
+    	});
 
 	self.filteredList = ko.computed( function() {
 		var filter = self.filterTerm().toLowerCase();
+		
 		if (filter) {
-            return ko.utils.arrayFilter(self.attractionList(), function(attraction) {
+            		return ko.utils.arrayFilter(self.attractionList(), function(attraction) {
 				var result = (attraction.name.toLowerCase().search(filter) >= 0);
 				attraction.visible(result);
 				return result;
 			});
 		} else {
-            self.attractionList().forEach( function( a )  {
-                a.visible(true);
-            });
+            		self.attractionList().forEach( function( a )  {
+                		a.visible(true);
+			});
 			return self.attractionList();
 		}
 	}, self);
@@ -228,7 +229,3 @@ function errorHandlingFunction() {
 function initialize() {
     ko.applyBindings(new modelViewViewModel());
 }
-
-
-
-
