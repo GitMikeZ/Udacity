@@ -137,8 +137,9 @@ application.secret_key = 'SECRET KEY'
 
 `sudo apt-get autoremove`
 
+**Note:** To view logs, use command ```sudo less /var/log/auth.log```
 
-
+More can be found at: https://www.digitalocean.com/community/tutorials/how-to-monitor-system-authentication-logs-on-ubuntu
 
 
 
