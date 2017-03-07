@@ -85,6 +85,8 @@ sudo -u www-data git clone https://github.com/GitMikeZ/Udacity.git Catalog
 
 ## Modify catalog.wsgi file to the following
 
+Create new .wsgi file in Catalog directory and follow code 
+
 ```python
 import sys
 import logging
@@ -96,7 +98,7 @@ from Catalog import app as application
 application.secret_key = 'SECRET KEY'
 ```
 
-## Create and modify catalogapp.conf
+## Create and modify catalogapp.conf in directory /etc/apache2/sites-enabled
 
 ```
 <VirtualHost *:80>
@@ -115,6 +117,8 @@ application.secret_key = 'SECRET KEY'
             CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
+
+**Note:** To find a file, use command: ```sudo find / -name catalogapp.conf``` 
 
 ###Use a2dissite command to disable the 000-default configuration file
 
