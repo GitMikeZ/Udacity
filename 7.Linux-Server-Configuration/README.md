@@ -104,7 +104,7 @@ application.secret_key = 'SECRET KEY'
 <VirtualHost *:80>
             ServerName 54.208.105.233
             ServerAdmin grader@54.208.105.233
-            WSGIScriptAlias / /var/www/html/catalog.wsgi
+            WSGIScriptAlias / /srv/Catalog/Catalog/catalog.wsgi
             <Directory /srv/Catalog/Catalog>
                     Require all granted
             </Directory>
@@ -119,6 +119,8 @@ application.secret_key = 'SECRET KEY'
 ```
 
 **Note:** To find a file, use command: ```sudo find / -name catalogapp.conf``` 
+
+Restart apache server: `sudo service apache2 restart`
 
 ###Use a2dissite command to disable the 000-default configuration file
 
@@ -137,9 +139,9 @@ application.secret_key = 'SECRET KEY'
 
 `sudo apt-get autoremove`
 
-**Note:** To view logs, use command ```sudo less /var/log/auth.log```
+**Note:** To view error logs, use command ```sudo less /var/log/apache2/error.log```
 
-More can be found at: https://www.digitalocean.com/community/tutorials/how-to-monitor-system-authentication-logs-on-ubuntu
+
 
 
 
