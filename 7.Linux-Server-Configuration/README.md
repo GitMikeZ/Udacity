@@ -128,8 +128,6 @@ Restart apache server: `sudo service apache2 restart`
 
 `sudo a2ensite catalogapp`
 
-## Timezone
-
 ## Update and Upgrades
 
 `sudo apt-get update` <br/>
