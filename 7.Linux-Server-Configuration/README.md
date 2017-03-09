@@ -6,13 +6,7 @@ This server is than used to host a previous Udacity web application.
 
 ## Server Specifics
 
-URL: <br/>
-
-IP: <br/>
-
-SSH Port: 2200 <br/>
-HTTP Port: 80 <br/>
-NTP Port: 123 <br/>
+IP: http://54.208.105.233/
 
 ## Package Install from Ubuntu (See packages.ubuntu.com for descriptions)
 
@@ -128,6 +122,8 @@ Restart apache server: `sudo service apache2 restart`
 
 `sudo a2ensite catalogapp`
 
+**Note:** To view error logs, use command ```sudo less /var/log/apache2/error.log```
+
 ## Update and Upgrades
 
 `sudo apt-get update` <br/>
@@ -160,9 +156,6 @@ Restart apache server: `sudo service apache2 restart`
 ### Allow ssh
 `sudo ufw allow ssh`
 
-### Change port 22 to 2200
-`sudo vim /etc/ssh/sshd_config` 
-
 ### Open ports for Firewall
 ```
 sudo ufw allow www
@@ -172,7 +165,7 @@ sudo ufw allow 123/ntp
 sudo ufw enable
 ```
 
-**Note:** To view error logs, use command ```sudo less /var/log/apache2/error.log```
+**Note:** Show added ports ```sudo ufw show added```
 
 
 
