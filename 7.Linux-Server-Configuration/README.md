@@ -122,9 +122,9 @@ application.secret_key = 'SECRET KEY'
 
 Restart apache server: `sudo service apache2 restart`
 
-###Use a2dissite command to disable the 000-default configuration file
+### Use a2dissite command to disable the 000-default configuration file
 
-`sudo a2dissite 000-default`
+`sudo a2dissite 000-default` <br/>
 
 `sudo a2ensite catalogapp`
 
@@ -140,7 +140,7 @@ Restart apache server: `sudo service apache2 restart`
 ## Disable root login 
 
 ### Altering file /etc/ssh/sshd_config
-`PermitRootLogin no`
+`PermitRootLogin no` <br/>
 `PasswordAuthentication no`
 
 ### Restart ssh
