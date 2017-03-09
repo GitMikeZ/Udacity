@@ -33,8 +33,6 @@ Giving grader sudo permission <br/>
 Confirm user with Finger <br/>
 `finger grader`<br/>
 
-**Note**: Remote login for user root is disabled
-
 ## Installing Public Key
 
 ```
@@ -85,12 +83,14 @@ Create new .wsgi file in Catalog directory and follow code
 import sys
 import logging
 logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0, '/srv/Catalog/Catalog')
+sys.path.insert(0, '/srv/Catalog/')
 
 from Catalog import app as application
 
 application.secret_key = 'SECRET KEY'
 ```
+
+**Note**: Be careful of directory pathing
 
 ## Create and modify catalogapp.conf in directory /etc/apache2/sites-enabled
 
