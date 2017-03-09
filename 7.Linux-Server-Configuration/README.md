@@ -159,9 +159,8 @@ Restart apache server: `sudo service apache2 restart`
 ### Open ports for Firewall
 ```
 sudo ufw allow www
-sudo ufw allow 2200/ssh
-sudo ufw allow 80/http
-sudo ufw allow 123/ntp
+sudo ufw allow 2200/tcp
+sudo ufw allow ntp
 sudo ufw enable
 ```
 
