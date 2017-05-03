@@ -6,7 +6,9 @@ This server is than used to host a previous Udacity web application.
 
 ## Server Specifics
 
-IP: http://54.208.105.233/
+IP: ~~http://54.208.105.233/~~
+
+Instance has been shut down.
 
 ## Package Install from Ubuntu (See packages.ubuntu.com for descriptions)
 
